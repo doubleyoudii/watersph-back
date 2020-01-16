@@ -1,9 +1,10 @@
 import { MongoSchema, MongoModel } from "@mayajs/mongo";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 const schema = MongoSchema({
-  userName: {
+  fullName: {
     //this should be Full Name
-    required: [true, "Name is required."],
     type: String
   },
   password: {
@@ -15,10 +16,31 @@ const schema = MongoSchema({
     type: String,
     unique: true
   },
+  email: {
+    type: String
+  },
   dateRegistered: {
     type: Date,
     default: new Date().getTime()
   }
+});
+
+schema.pre("save", function(next) {
+  let dealer: any = this;
+
+  if (!dealer.isModified("password")) return next();
+  //generate a salt
+  bcrypt.genSalt(10, function(err, salt) {
+    if (err) return next(err);
+
+    //Hash password using salt
+    bcrypt.hash(dealer.password, salt, function(err, hash) {
+      if (err) return next(err);
+
+      dealer.password = hash;
+      next();
+    });
+  });
 });
 
 export default MongoModel("Register", schema);

@@ -31,9 +31,72 @@ export class RegisterController {
         .required()
     ]
   })
-  async post(req: Request, res: Response, next: NextFunction): Promise<void> {
-    const result = await this.services.verifyMemberId(req.body);
-    // res.status(result.status).send(result);
+  async post(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) /* : Promise<void> */ {
+    const result: any = await this.services.verifyMemberId(req.body);
+    res.status(result.status).send(result);
+
+    if (result.status === 200) {
+      const mailContent = `
+      <h4>This is the Confirmation link for Verifying the Registration</h4>
+      <p>Note: This is only a one time confirmation link. If there's a problem occur during the proccess, please send another Link. This Link will expire after 1hr, Thank you</p>
+      <div>
+        /* <p><a href="http://localhost:TOBECHANGE/TOBECHANGE/${result.data.payload.memberId}/${result.data.token}">Redirect to "Sign up" Page.</p> */
+
+        <p><a href="http://localhost:3333/register/validate/${result.data.payload.memberId}/${result.data.token}">http://localhost:3333/register/validate/${result.data.payload.memberId}/${result.data.token}</p>
+      </div>
+    `;
+
+      async function main() {
+        // create reusable transporter object using the default SMTP transport
+        let transporter = nodemailer.createTransport({
+          host: "smtp.mail.yahoo.com",
+          port: 465,
+          secure: true, // true for 465, false for other ports
+          auth: {
+            user: process.env.USER_EMAIL, // generated ethereal user
+            pass: process.env.USER_PASS // generated ethereal password
+          },
+          tls: {
+            rejectUnauthorized: false
+          }
+        });
+
+        // send mail with defined transport object
+        let info = await transporter.sendMail({
+          from: `"William of Techcellar 👻" <${process.env.USER_EMAIL}>`, // sender address
+          to: `${result.data.payload.email}`, // list of receivers
+          subject: "Email Verification", // Subject line
+          text: "Read Me!", // plain text body
+          html: mailContent // html body
+        });
+
+        console.log("Message sent: %s", info.messageId);
+        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+      }
+
+      main().catch(console.error);
+    }
+  }
+
+  @Get({ path: "/validate/:memberId/:token", middlewares: [] })
+  async getCredentials(req: Request, res: Response, next: NextFunction) {
+    // Use a function on SampleService
+
+    const result = await this.services.getCredentials(req.params);
+
+    // Do some GET stuff here
+    res.status(result.status).json(result);
+  }
+
+  @Post({ path: "/signup/", middlewares: [] })
+  async postForm(req: Request, res: Response, next: NextFunction) {
+    // Do some POST stuff here
+    const result = await this.services.postForm(req.body);
+    res.status(result.status).send(result);
   }
 
   // constructor(private services: SampleServices) {}

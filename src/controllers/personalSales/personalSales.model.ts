@@ -1,7 +1,7 @@
 import { MongoSchema, MongoModel } from "@mayajs/mongo";
 
 const schema = MongoSchema({
-  ProductCode: {
+  /* ProductCode: {
     type: String
   },
   PAYMENTTYPE: {
@@ -22,12 +22,13 @@ const schema = MongoSchema({
   PRODUCT: {
     type: String
   },
-  // POSLOCATION: {
-  //   type: String
-  // },
+  POSLOCATION: {
+    type: String
+  }, */
   MemberID: {
     type: String
-  },
+  }
+  /* ,
   Customer: {
     type: String
   },
@@ -64,9 +65,9 @@ const schema = MongoSchema({
   weekno: {
     type: String
   },
-  // DistributorPro_: {
-  //   type: String
-  // },
+  DistributorPro_: {
+    type: String
+  },
   status: {
     type: String
   },
@@ -78,7 +79,7 @@ const schema = MongoSchema({
   },
   Rank: {
     type: String
-  }
+  } */
 });
 
 export default MongoModel("PersonalSales", schema);
