@@ -7,13 +7,13 @@ const nodemailer = require("nodemailer");
 
 @Controller({
   model: "./register.model",
-  route: "/register"
+  route: "/"
 })
 export class RegisterController {
   constructor(private services: RegisterServices) {}
 
   @Get({
-    path: "/",
+    path: "register/",
     middlewares: []
   })
   get(req: Request, res: Response, next: NextFunction): any {
@@ -21,7 +21,7 @@ export class RegisterController {
   }
 
   @Post({
-    path: "/",
+    path: "register/",
     middlewares: [
       Check("email")
         .isEmail()
@@ -82,7 +82,7 @@ export class RegisterController {
     }
   }
 
-  @Get({ path: "/validate/:memberId/:token", middlewares: [] })
+  @Get({ path: "register/validate/:memberId/:token", middlewares: [] })
   async getCredentials(req: Request, res: Response, next: NextFunction) {
     // Use a function on SampleService
 
@@ -92,7 +92,7 @@ export class RegisterController {
     res.status(result.status).json(result);
   }
 
-  @Post({ path: "/signup/", middlewares: [] })
+  @Post({ path: "register/signup/", middlewares: [] })
   async postForm(req: Request, res: Response, next: NextFunction) {
     // Do some POST stuff here
     const result = await this.services.postForm(req.body);

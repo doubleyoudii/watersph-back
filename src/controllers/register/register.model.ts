@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 const schema = MongoSchema({
   fullName: {
     //this should be Full Name
+    required: [true, "Password is Required"],
     type: String
   },
   password: {
@@ -17,6 +18,7 @@ const schema = MongoSchema({
     unique: true
   },
   email: {
+    required: [true, "Password is Required"],
     type: String
   },
   dateRegistered: {
