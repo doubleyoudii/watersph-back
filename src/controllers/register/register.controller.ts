@@ -4,16 +4,17 @@ import { Controller } from "@mayajs/core";
 import { RegisterServices } from "./register.service";
 const _ = require("lodash");
 const nodemailer = require("nodemailer");
+const jwt = require("jsonwebtoken");
 
 @Controller({
   model: "./register.model",
-  route: "/"
+  route: "/register"
 })
 export class RegisterController {
   constructor(private services: RegisterServices) {}
 
   @Get({
-    path: "register/",
+    path: "/",
     middlewares: []
   })
   get(req: Request, res: Response, next: NextFunction): any {
@@ -21,7 +22,7 @@ export class RegisterController {
   }
 
   @Post({
-    path: "register/",
+    path: "/",
     middlewares: [
       Check("email")
         .isEmail()
@@ -82,7 +83,7 @@ export class RegisterController {
     }
   }
 
-  @Get({ path: "register/validate/:memberId/:token", middlewares: [] })
+  @Get({ path: "/validate/:memberId/:token", middlewares: [] })
   async getCredentials(req: Request, res: Response, next: NextFunction) {
     // Use a function on SampleService
 
@@ -92,11 +93,36 @@ export class RegisterController {
     res.status(result.status).json(result);
   }
 
-  @Post({ path: "register/signup/", middlewares: [] })
+  @Post({ path: "/signup", middlewares: [] })
   async postForm(req: Request, res: Response, next: NextFunction) {
     // Do some POST stuff here
     const result = await this.services.postForm(req.body);
     res.status(result.status).send(result);
+  }
+
+  @Post({ path: "/login", middlewares: [] })
+  async postLogin(req: Request, res: Response, next: NextFunction) {
+    const result: any = await this.services.postLogin(req.body);
+    console.log(result);
+    //Sign token   secket key must be hidden
+    if (result.status !== 200) {
+      res.status(result.status).send(result);
+      return;
+    }
+    await jwt.sign(
+      result.data,
+      "thequick",
+      { expiresIn: "1h" },
+      (e: any, token: string) => {
+        res
+          .status(result.status)
+          .header("authorization", token)
+          .json({
+            success: true,
+            token: "Bearer " + token
+          });
+      }
+    );
   }
 
   // constructor(private services: SampleServices) {}
