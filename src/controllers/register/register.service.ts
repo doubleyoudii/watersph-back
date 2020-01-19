@@ -3,7 +3,6 @@ import { Models } from "@mayajs/mongo";
 import { ProfileServices } from "../profile/profile.service";
 
 var _ = require("lodash");
-const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
@@ -38,7 +37,7 @@ export class RegisterServices {
       };
 
       const salt = `${data.memberId}`;
-      const token = jwt.sign(payload, salt, { expiresIn: "2h" });
+      const token = jwt.sign(payload, salt, { expiresIn: "1h" });
       console.log(token);
 
       return {
@@ -185,42 +184,6 @@ export class RegisterServices {
           }); */
           }
         });
-      /* .then(dealer => {
-        if (!dealer) {
-          res.status(404).json({
-            message: "Cannot find Email"
-          });
-          return;
-        }
-        bcrypt.compare(body.password, dealer.password).then(isMatch => {
-          if (isMatch) {
-            //User match
-            const payload = {
-              _id: dealer._id,
-              email: dealer.email
-            };
-            //Create JWT Payload
-
-            //Sign token
-            jwt.sign(
-              payload,
-              process.env.JWT_SALT_LOGIN,
-              { expiresIn: "1h" },
-              (e, token) => {
-                res.header("authorization", token).json({
-                  success: true,
-                  token: "Bearer " + token
-                });
-              }
-            );
-          } else {
-            return res.status(400).json({
-              message: "Incorrect Password. Try Again"
-            });
-          }
-        });
-      })
-      .catch(err => console.log(err)); */
     } catch (error) {
       return {
         status: 400,
@@ -229,5 +192,21 @@ export class RegisterServices {
         meta: {}
       };
     }
+  }
+
+  //funtion Needed in forgot password
+  async registrationMember(body: any) {
+    let user = await this.model.findOne({ memberId: body });
+    return user;
+  }
+
+  async findRegMemberAndChangepassword(body: any) {
+    let user = await this.model.findOne({ memberId: body.memberId });
+    if (!user) {
+      return null;
+    }
+    user.password = body.password;
+    await user.save();
+    return user;
   }
 }
