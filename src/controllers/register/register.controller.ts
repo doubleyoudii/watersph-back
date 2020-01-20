@@ -45,9 +45,9 @@ export class RegisterController {
       <h4>This is the Confirmation link for Verifying the Registration</h4>
       <p>Note: This is only a one time confirmation link. If there's a problem occur during the proccess, please send another Link. This Link will expire after 1hr, Thank you</p>
       <div>
-        /* <p><a href="http://localhost:TOBECHANGE/TOBECHANGE/${result.data.payload.memberId}/${result.data.token}">Redirect to "Sign up" Page.</p> */
+        
 
-        <p><a href="http://localhost:3333/register/validate/${result.data.payload.memberId}/${result.data.token}">http://localhost:3333/register/validate/${result.data.payload.memberId}/${result.data.token}</p>
+        <p><a href="http://127.0.0.1:4200/signup/${result.data.payload.memberId}/${result.data.token}">http://localhost:3333/register/validate/${result.data.payload.memberId}/${result.data.token}</p>
       </div>
     `;
 
@@ -124,51 +124,4 @@ export class RegisterController {
       }
     );
   }
-
-  // constructor(private services: SampleServices) {}
-
-  // // This is a GET request equal to "/sample"
-  // @Get({ path: "/", middlewares: [] })
-  // get(req: Request, res: Response, next: NextFunction): void {
-  //   // Use a function on SampleService
-  //   this.services.getSamples();
-
-  //   // Do some GET stuff here
-  //   res.send("This is a GET request");
-  // }
-
-  // // This is a GET request equal to "/sample/:id"
-  // @Get({ path: "/:id", middlewares: [] })
-  // getId(req: Request, res: Response, next: NextFunction): void {
-  //   // Do some GET stuff here
-  //   res.send("This is a GET with id request");
-  // }
-
-  // // This is a POST request equal to "/sample/:id/:name"
-  // @Post({ path: "/:id/:name", middlewares: [] })
-  // post(req: Request, res: Response, next: NextFunction): void {
-  //   // Do some POST stuff here
-  //   res.send("This is a POST request");
-  // }
-
-  // // This is a PATCH request equal to "/sample/:id/custom-path"
-  // @Patch({ path: "/:id/custom-path", middlewares: [] })
-  // patch(req: Request, res: Response, next: NextFunction): void {
-  //   // Do some PATCH stuff here
-  //   res.send("This is a PATCH request");
-  // }
-
-  // // This is a PUT request equal to "/sample/:id"
-  // @Put({ path: "/:id", middlewares: [] })
-  // put(req: Request, res: Response, next: NextFunction): void {
-  //   // Do some PUT stuff here
-  //   res.send("This is a PUT request");
-  // }
-
-  // // This is a DELETE request equal to "/sample/:id"
-  // @Delete({ path: "/:id", middlewares: [] })
-  // delete(req: Request, res: Response, next: NextFunction): void {
-  //   // Do some DELETE stuff here
-  //   res.send("This is a DELETE request");
-  // }
 }
