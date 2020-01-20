@@ -111,7 +111,7 @@ export class RegisterController {
     }
     await jwt.sign(
       result.data,
-      "thequick",
+      "saltregisterlogin",
       { expiresIn: "1h" },
       (e: any, token: string) => {
         res

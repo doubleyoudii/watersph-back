@@ -93,7 +93,14 @@ export class RegisterServices {
   }
 
   async postForm(body: any) {
-    const data = _.pick(body, ["fullName", "password", "email", "memberId"]);
+    const data = _.pick(body, [
+      "fullName",
+      "password",
+      "email",
+      "memberId",
+      "contactNo",
+      "userName"
+    ]);
     try {
       const checkIfexist = await this.model.findOne({
         memberId: data.memberId
@@ -111,7 +118,7 @@ export class RegisterServices {
       const finalReg = await result.save();
       return {
         status: 200,
-        message: "REgister Successfully!",
+        message: "Register Successfully!",
         data: finalReg,
         meta: {}
       };
@@ -208,5 +215,11 @@ export class RegisterServices {
     user.password = body.password;
     await user.save();
     return user;
+  }
+
+  //Admin Service need
+  async getRegistered() {
+    const list = await this.model.find();
+    return list;
   }
 }

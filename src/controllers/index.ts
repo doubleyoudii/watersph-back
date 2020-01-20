@@ -6,3 +6,4 @@ export { GroupSalesController } from "./groupSales/groupSales.controller";
 export { GenealogyController } from "./genealogy/genealogy.controller";
 export { LedgerController } from "./ledger/ledger.controller";
 export { ForgotPasswordController } from "./forgotPassword/forgotPassword.controller";
+export { AdminController } from "./admin/admin.controller";

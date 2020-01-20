@@ -12,6 +12,14 @@ const schema = MongoSchema({
     required: [true, "Password is Required"],
     type: String
   },
+  contactNo: {
+    required: [true, "Mobile number is Required"],
+    type: Number
+  },
+  userName: {
+    required: [true, "userName is required"],
+    type: String
+  },
   memberId: {
     required: [true, "Member ID is required"],
     type: String,
