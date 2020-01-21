@@ -28,6 +28,7 @@ const schema = MongoSchema({
   email: {
     required: [true, "email is Required"],
     type: String
+    //try to add unique property here
   },
   dateRegistered: {
     type: Date,

@@ -30,7 +30,7 @@ export class ForgotPasswordController {
       <p>Note: This is only a one time confirmation link. If there's a problem occur during the proccess, please send another Link. This Link will expire after 1hr, Thank you</p>
       <div>
         
-        <p><a href="http://127.0.0.1:4200/signup/${result.data.payload.memberId}/${result.data.token}">http://localhost:3333/forgotPassword/validate/${result.data.payload.memberId}/${result.data.token} **Proceed to Changing of Password**</p>
+        <p><a href="http://127.0.0.1:4200/change-password/${result.data.payload.memberId}/${result.data.token}">http://localhost:3333/forgotPassword/validate/${result.data.payload.memberId}/${result.data.token} **Proceed to Changing of Password**</p>
       </div>
     `;
 
