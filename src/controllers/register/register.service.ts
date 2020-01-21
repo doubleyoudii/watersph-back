@@ -217,9 +217,14 @@ export class RegisterServices {
     return user;
   }
 
-  //Admin Service need
+  //Admin Service need````````````````````````````````````````
   async getRegistered() {
     const list = await this.model.find();
     return list;
+  }
+
+  async getRegisteredById(id: any) {
+    const member = await this.model.findOne({ _id: id });
+    return member;
   }
 }

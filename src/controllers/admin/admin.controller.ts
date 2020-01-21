@@ -61,4 +61,10 @@ export class AdminController {
     const result = await this.services.getList();
     res.status(result.status).send(result);
   }
+
+  @Get({ path: "/registrationList/:id", middlewares: [verifyToken] })
+  async getListById(req: Request, res: Response, next: NextFunction) {
+    const result = await this.services.getListById(req.params.id);
+    res.status(result.status).send(result);
+  }
 }

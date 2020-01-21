@@ -95,4 +95,32 @@ export class AdminServices {
       };
     }
   }
+
+  async getListById(id:any){
+    try {
+      const result = await this.register.getRegisteredById(id);
+      if (!result) {
+        return {
+          status:200,
+          message: "Member does not exist",
+          data: [],
+          meta: {}
+        }
+      }
+
+      return {
+        status: 200,
+        message: "Get Registered by Id",
+        data: result,
+        meta: {}
+      }
+    } catch (error) {
+      return {
+        status: 400,
+        message: error.errmsg ? error.errmsg : error.toString(),
+        data: [],
+        meta: {}
+      };
+    }
+  }
 }
