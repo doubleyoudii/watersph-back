@@ -4,6 +4,8 @@ import { Controller } from "@mayajs/core";
 import { AdminServices } from "./admin.service";
 const jwt = require("jsonwebtoken");
 
+const { verifyToken } = require("../../middleware/index");
+
 @Controller({
   model: "./admin.model",
   route: "/admin"
@@ -37,7 +39,7 @@ export class AdminController {
     }
     await jwt.sign(
       result.data,
-      "saltadminlogin",
+      "testsecret",
       { expiresIn: "1h" },
       (e: any, token: string) => {
         res
@@ -51,7 +53,10 @@ export class AdminController {
     );
   }
 
-  @Get({ path: "/registrationList", middlewares: [] })
+  @Get({
+    path: "/registrationList",
+    middlewares: [verifyToken]
+  })
   async getList(req: Request, res: Response, next: NextFunction) {
     const result = await this.services.getList();
     res.status(result.status).send(result);
