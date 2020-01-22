@@ -23,7 +23,7 @@ export class ProfileServices {
       return {
         status: 200,
         message: "Valid Member ID",
-        data: result.MemberID,
+        data: result,
         meta: {}
       };
     } catch (error) {

@@ -32,7 +32,7 @@ export class RegisterServices {
 
       //Member ID is Valid
       const payload = {
-        memberId: member.data,
+        memberId: member.data.MemberID,
         email: data.email
       };
 

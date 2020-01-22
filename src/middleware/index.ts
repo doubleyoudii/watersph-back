@@ -17,6 +17,44 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
         "testsecret",
         async (err: any, authData: any) => {
           if (err) {
+            console.log(err);
+            res.status(403).json({
+              message: "Forbidden"
+            });
+          } else {
+            req.body.user = authData;
+            next();
+          }
+        }
+      );
+    } else {
+      res.status(403).json({
+        message: "Forbidden 2"
+      });
+    }
+  } catch (error) {
+    res.status(403).json({
+      message: "Forbidden"
+    });
+  }
+};
+
+const verifyTokenMember = (req: Request, res: Response, next: NextFunction) => {
+  try {
+    //Do something in Token
+    const bearerHeader = req.headers["authorization"];
+
+    if (typeof bearerHeader !== undefined) {
+      const bearer = bearerHeader!.split(" ");
+      const bearerToken = bearer[1];
+      req.body.token = bearerToken;
+
+      jwt.verify(
+        req.body.token,
+        "saltregisterlogin",
+        async (err: any, authData: any) => {
+          if (err) {
+            console.log(err);
             res.status(403).json({
               message: "Forbidden"
             });
@@ -39,7 +77,8 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
 };
 
 module.exports = {
-  verifyToken
+  verifyToken,
+  verifyTokenMember
   // authenticate,
   // authenticateActivate,
   // authenticateLogin,
