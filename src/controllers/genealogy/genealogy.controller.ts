@@ -25,6 +25,7 @@ export class GenealogyController {
       return Object.keys(x);
     }
 
+    //To Be Change
     // const userId = req.body.user.memberId;
     const userId = "QCY214337";
     const result = await this.services.getFilter(userId);
@@ -64,6 +65,12 @@ export class GenealogyController {
         periodInterval: filteredPeriod
       }
     });
+  }
+
+  @Post({ path: "/specific", middlewares: [verifyTokenMember] })
+  async postFilter(req: Request, res: Response, next: NextFunction) {
+    const result = await this.services.postFilter(req.body);
+    res.status(result.status).send(result);
   }
   // constructor(private services: SampleServices) {}
 
