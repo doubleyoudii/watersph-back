@@ -67,9 +67,16 @@ export class GenealogyController {
     });
   }
 
-  @Post({ path: "/specific", middlewares: [verifyTokenMember] })
-  async postFilter(req: Request, res: Response, next: NextFunction) {
-    const result = await this.services.postFilter(req.body);
+  @Get({ path: "/specific/:date/:period", middlewares: [verifyTokenMember] })
+  async getData(req: Request, res: Response, next: NextFunction) {
+    //To be Change
+    const userId = "QCY214337";
+    const params = {
+      id: userId,
+      date: req.params.date,
+      period: req.params.period
+    };
+    const result = await this.services.getData(params);
     res.status(result.status).send(result);
   }
   // constructor(private services: SampleServices) {}

@@ -29,19 +29,26 @@ export class GenealogyServices {
     }
   }
 
-  async postFilter(body: any) {
-    const data = _.pick(body, ["user", "date", "period"]);
-    console.log(data);
-    //To Be changed
-    const userId = "QCY214337";
+  async getData(params: any) {
+    const parameter = params;
+    const rawDate = parameter.date;
+    const convertDate = rawDate.split("-").join("/");
+    console.log(convertDate);
+    console.log(parameter);
+
     try {
       const geneData = await this.model
         .find({
           // MemberID: data.user.memberId,
-          MemberID: userId,
-          DateProcessed: data.date,
-          PERIODNO: data.period
+          MemberID: parameter.id,
+          DateProcessed: convertDate,
+          PERIODNO: Number(parameter.period)
         })
+        /* .find({
+          MemberID: "QCY214337",
+          PERIODNO: 12,
+          DateProcessed: "12/18/2019"
+        }) */
         .sort({ LevelPosition: 1 });
       // console.log(geneData);
 
