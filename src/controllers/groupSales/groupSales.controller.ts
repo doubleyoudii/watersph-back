@@ -9,6 +9,12 @@ import { GroupSalesServices } from "./groupSales.service";
 })
 export class GroupSalesController {
   constructor(private services: GroupSalesServices) {}
+
+  @Get({ path: "/", middlewares: [] })
+  async getDates(req: Request, res: Response, next: NextFunction) {
+    const result = await this.services.getDates();
+    res.status(result.status).send(result);
+  }
   // constructor(private services: SampleServices) {}
 
   // // This is a GET request equal to "/sample"

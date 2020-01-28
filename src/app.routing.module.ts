@@ -7,7 +7,8 @@ import {
   PersonalSalesController,
   ProfileController,
   ForgotPasswordController,
-  AdminController
+  AdminController,
+  CutoffDatesController
 } from "./controllers";
 
 export const routes = [
@@ -21,7 +22,8 @@ export const routes = [
       PersonalSalesController,
       ProfileController,
       ForgotPasswordController,
-      AdminController
+      AdminController,
+      CutoffDatesController
     ],
     middlewares: [],
     path: ""
