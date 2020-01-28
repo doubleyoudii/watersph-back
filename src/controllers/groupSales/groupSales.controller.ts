@@ -15,6 +15,18 @@ export class GroupSalesController {
     const result = await this.services.getDates();
     res.status(result.status).send(result);
   }
+
+  @Get({ path: "/specific/:datefrom", middlewares: [] })
+  async getSales(req: Request, res: Response, next: NextFunction) {
+    const reqData = {
+      //to be change MemberId from middleware
+      id: "QCY215803",
+      datefrom: req.params.datefrom
+    };
+    const result = await this.services.getSales(reqData);
+
+    res.status(result.status).send(result);
+  }
   // constructor(private services: SampleServices) {}
 
   // // This is a GET request equal to "/sample"
