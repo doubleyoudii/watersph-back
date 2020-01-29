@@ -8,7 +8,13 @@ import {
   ProfileController,
   ForgotPasswordController,
   AdminController,
-  CutoffDatesController
+  CutoffDatesController,
+  Soa_summary_incomeController,
+  Soa_personal_salesController,
+  Soa_goldmineController,
+  Soa_diamondmineController,
+  Soa_gpdController,
+  Soa_royalty_discountController
 } from "./controllers";
 
 export const routes = [
@@ -23,7 +29,13 @@ export const routes = [
       ProfileController,
       ForgotPasswordController,
       AdminController,
-      CutoffDatesController
+      CutoffDatesController,
+      Soa_summary_incomeController,
+      Soa_personal_salesController,
+      Soa_goldmineController,
+      Soa_diamondmineController,
+      Soa_gpdController,
+      Soa_royalty_discountController
     ],
     middlewares: [],
     path: ""

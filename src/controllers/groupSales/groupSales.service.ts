@@ -52,14 +52,13 @@ export class GroupSalesServices {
 
       const dateList = await this.cutoff.passDate();
       const fromDate = dateList.dateFrom;
-      // console.log(fromDate);
 
       const index = fromDate.indexOf(convertedDateFrom);
 
       if (index === -1) {
         return {
-          status: 404,
-          message: "Invalid Date. Please Try Again!",
+          status: 200,
+          message: "Invalid Date. Please Try other Dates!",
           data: [],
           meta: {}
         };
@@ -77,7 +76,7 @@ export class GroupSalesServices {
 
       const partialGroup = JSON.stringify(groupListAll);
       const b2bFilter = JSON.parse(partialGroup);
-      // console.log(b2bFilter);
+
       //this contains objects in array
       const pickedDates = b2bFilter.map((el: any) => {
         return el;
