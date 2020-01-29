@@ -66,4 +66,50 @@ export class CutoffDatesServices {
       dateTo: sortedDateTo
     };
   }
+
+  async passYearAndPeriod() {
+    function removeDuplicates(array: any) {
+      let x: any = {};
+      array.forEach(function(i: any) {
+        if (!x[i]) {
+          x[i] = true;
+        }
+      });
+      return Object.keys(x);
+    }
+
+    const data = await this.model.find();
+    let partialFilter: any = JSON.stringify(data);
+    let b2bfilter = JSON.parse(partialFilter);
+
+    let year: any = [];
+    let period: any = [];
+
+    const pickedFilter = b2bfilter.map((el: any) => {
+      const picked = _.pick(el, ["DateFrom", "DateTo", "PeriodNo"]);
+      return picked;
+    });
+
+    pickedFilter.forEach((el: any) => {
+      let splitYear = el.DateTo.split("/");
+      year.push(splitYear[2]);
+      period.push(el.PeriodNo);
+    });
+
+    const fnalYear = removeDuplicates(year);
+    const fnalPeriod = removeDuplicates(period);
+
+    const sortedYear = fnalYear.sort(function(a: any, b: any) {
+      return a - b;
+    });
+
+    const sortedPeriod = fnalPeriod.sort(function(a: any, b: any) {
+      return a - b;
+    });
+
+    return {
+      year: sortedYear,
+      period: sortedPeriod
+    };
+  }
 }

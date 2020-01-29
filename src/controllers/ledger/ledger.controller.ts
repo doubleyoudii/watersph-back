@@ -8,7 +8,25 @@ import { LedgerServices } from "./ledger.service";
   route: "/ledger"
 })
 export class LedgerController {
-  constructor(private service: LedgerServices) {}
+  constructor(private services: LedgerServices) {}
+
+  @Get({ path: "/", middlewares: [] })
+  async getFilter(req: Request, res: Response, next: NextFunction) {
+    const result = await this.services.getFilter();
+    res.status(result.status).send(result);
+  }
+
+  @Get({ path: "/specific/:year/:period", middlewares: [] })
+  async getSoa(req: Request, res: Response, next: NextFunction) {
+    const id = "QC9500073";
+    const request = {
+      id: id,
+      year: Number(req.params.year),
+      period: Number(req.params.period)
+    };
+    const result = await this.services.getSoa(request);
+    res.status(result.status).send(result);
+  }
   // constructor(private services: SampleServices) {}
 
   // // This is a GET request equal to "/sample"
