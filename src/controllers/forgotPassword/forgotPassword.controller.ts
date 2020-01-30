@@ -79,7 +79,6 @@ export class ForgotPasswordController {
   @Post({ path: "/changePassword", middlewares: [] })
   async postChange(req: Request, res: Response, next: NextFunction) {
     const result = await this.services.changePassword(req.body);
-    console.log(result);
     res.status(result.status).send(result);
   }
 }

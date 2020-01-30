@@ -79,10 +79,6 @@ const verifyTokenMember = (req: Request, res: Response, next: NextFunction) => {
 module.exports = {
   verifyToken,
   verifyTokenMember
-  // authenticate,
-  // authenticateActivate,
-  // authenticateLogin,
-  // authenticateUpload
 };
 //This will be add in every place you want to use this
 //const verify = require("../../middleware/verifyJWT");

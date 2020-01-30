@@ -11,15 +11,14 @@ export class RegisterServices {
   @Models("register") model: any;
   constructor(private profiles: ProfileServices) {}
   async verifyMemberId(body: any) {
-    // console.log(this.model);
+
     let data = _.pick(body, ["email", "memberId"]);
 
     try {
-      //This space is reserve incase the members.csv will be use.
       //find member id is MemberIDcollection
       //if true, return data. else return error
       const member = await this.profiles.findMember(data.memberId);
-      console.log(member);
+
       if (member.status !== 200) {
         //Checks if memberId is Valid or not
         return {
@@ -37,8 +36,8 @@ export class RegisterServices {
       };
 
       const salt = `${data.memberId}`;
-      const token = jwt.sign(payload, salt, { expiresIn: "1h" });
-      console.log(token);
+      const token = jwt.sign(payload, salt, { expiresIn: "7h" });
+
 
       return {
         status: 200,
@@ -61,12 +60,9 @@ export class RegisterServices {
     const parameter = _.pick(body, ["memberId", "token"]);
     try {
       const payload = jwt.verify(parameter.token, parameter.memberId);
-      console.log(payload);
+
       if (
         !payload
-        /* payload === undefined ||
-        payload.id === undefined ||
-        payload.email === undefined */
       ) {
         return {
           status: 400,
@@ -123,7 +119,7 @@ export class RegisterServices {
         meta: {}
       };
     } catch (error) {
-      console.log(error);
+
       return {
         status: 400,
         message: error.errmsg ? error.errmsg : error.toString(),
@@ -151,7 +147,7 @@ export class RegisterServices {
         .compare(data.password, result.password)
         .then((isMatch: any) => {
           if (isMatch) {
-            console.log(isMatch);
+
             //User match
 
             const payload = {

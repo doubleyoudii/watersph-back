@@ -33,8 +33,6 @@ export class GenealogyServices {
     const parameter = params;
     const rawDate = parameter.date;
     const convertDate = rawDate.split("-").join("/");
-    console.log(convertDate);
-    console.log(parameter);
 
     try {
       const geneData = await this.model
@@ -44,13 +42,8 @@ export class GenealogyServices {
           DateProcessed: convertDate,
           PERIODNO: Number(parameter.period)
         })
-        /* .find({
-          MemberID: "QCY214337",
-          PERIODNO: 12,
-          DateProcessed: "12/18/2019"
-        }) */
+
         .sort({ LevelPosition: 1 });
-      // console.log(geneData);
 
       return {
         status: 200,

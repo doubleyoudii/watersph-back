@@ -28,7 +28,7 @@ export class ForgotPasswordServices {
         memberId: testData.memberId
       };
       const salt = `${testData.memberId}`;
-      const token = jwt.sign(payload, salt, { expiresIn: "1h" });
+      const token = jwt.sign(payload, salt, { expiresIn: "7h" });
 
       return {
         status: 200,
@@ -49,7 +49,7 @@ export class ForgotPasswordServices {
 
   async getCredentials(params: any) {
     const parameter = _.pick(params, ["memberId", "token"]);
-    console.log(parameter);
+
     try {
       const payload = jwt.verify(parameter.token, parameter.memberId);
 
@@ -93,7 +93,6 @@ export class ForgotPasswordServices {
         };
       }
 
-      console.log(member);
       return {
         status: 200,
         message: "Password chage succesfully",

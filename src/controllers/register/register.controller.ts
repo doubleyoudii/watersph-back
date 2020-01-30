@@ -103,7 +103,7 @@ export class RegisterController {
   @Post({ path: "/login", middlewares: [] })
   async postLogin(req: Request, res: Response, next: NextFunction) {
     const result: any = await this.services.postLogin(req.body);
-    console.log(result);
+
     //Sign token   secket key must be hidden
     if (result.status !== 200) {
       res.status(result.status).send(result);
@@ -112,7 +112,7 @@ export class RegisterController {
     await jwt.sign(
       result.data,
       "saltregisterlogin",
-      { expiresIn: "1h" },
+      { expiresIn: "5h" },
       (e: any, token: string) => {
         res
           .status(result.status)

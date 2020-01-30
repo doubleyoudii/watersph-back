@@ -9,6 +9,7 @@ export class Soa_diamondmineServices {
   async getDiamondmine(id: any, year: any, period: any) {
     //Hard coded year just for testing, to be change
     const data = await this.model.find({
+      // Memberid: id,
       Memberid: "QCY19060613",
       YearProcessed: year,
       Period: period

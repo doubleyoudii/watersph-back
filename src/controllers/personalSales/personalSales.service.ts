@@ -32,8 +32,7 @@ export class PersonalSalesServices {
     const parameter = params;
     const rawDate = parameter.date;
     const convertDate = rawDate.split("-").join("/");
-    console.log(convertDate);
-    console.log(parameter);
+
     try {
       const data = await this.model
         .find({

@@ -10,7 +10,7 @@ export class ProfileServices {
     const memberId = idMember;
     try {
       const result = await this.model.findOne({ MemberID: memberId });
-      console.log(result);
+
       if (!result) {
         return {
           status: 400,
