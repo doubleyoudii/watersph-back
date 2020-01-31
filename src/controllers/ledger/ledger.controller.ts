@@ -2,6 +2,7 @@ import { Get, Patch, Post, Delete, Put } from "@mayajs/common";
 import { Request, Response, NextFunction } from "express";
 import { Controller } from "@mayajs/core";
 import { LedgerServices } from "./ledger.service";
+const { verifyTokenMember } = require("../../middleware/index");
 
 @Controller({
   model: "./ledger.model",
@@ -10,13 +11,13 @@ import { LedgerServices } from "./ledger.service";
 export class LedgerController {
   constructor(private services: LedgerServices) {}
 
-  @Get({ path: "/", middlewares: [] })
+  @Get({ path: "/", middlewares: [verifyTokenMember] })
   async getFilter(req: Request, res: Response, next: NextFunction) {
     const result = await this.services.getFilter();
     res.status(result.status).send(result);
   }
 
-  @Get({ path: "/specific/:year/:period", middlewares: [] })
+  @Get({ path: "/specific/:year/:period", middlewares: [verifyTokenMember] })
   async getSoa(req: Request, res: Response, next: NextFunction) {
     const id = "QC9500073";
     const request = {
