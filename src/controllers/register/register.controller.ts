@@ -5,6 +5,7 @@ import { RegisterServices } from "./register.service";
 const _ = require("lodash");
 const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
+const { verifyTokenMember } = require("../../middleware/index");
 
 @Controller({
   model: "./register.model",
@@ -123,5 +124,19 @@ export class RegisterController {
           });
       }
     );
+  }
+
+  @Get({ path: "/login/me", middlewares: [verifyTokenMember] })
+  async getMe(req: Request, res: Response, next: NextFunction) {
+    const userId = req.body.user.memberId;
+    const result = await this.services.getMe(userId);
+    res.status(result.status).send(result);
+  }
+
+  @Post({ path: "/login/me/edit", middlewares: [verifyTokenMember] })
+  async postEditReg(req: Request, res: Response, next: NextFunction) {
+    const userId = req.body.user.memberId;
+    const result = await this.services.postEditReg(userId, req.body);
+    res.status(result.status).send(result);
   }
 }

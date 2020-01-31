@@ -11,7 +11,6 @@ export class RegisterServices {
   @Models("register") model: any;
   constructor(private profiles: ProfileServices) {}
   async verifyMemberId(body: any) {
-
     let data = _.pick(body, ["email", "memberId"]);
 
     try {
@@ -38,7 +37,6 @@ export class RegisterServices {
       const salt = `${data.memberId}`;
       const token = jwt.sign(payload, salt, { expiresIn: "7h" });
 
-
       return {
         status: 200,
         message:
@@ -61,9 +59,7 @@ export class RegisterServices {
     try {
       const payload = jwt.verify(parameter.token, parameter.memberId);
 
-      if (
-        !payload
-      ) {
+      if (!payload) {
         return {
           status: 400,
           message: "Invalid Credentials! Try Again.",
@@ -119,7 +115,6 @@ export class RegisterServices {
         meta: {}
       };
     } catch (error) {
-
       return {
         status: 400,
         message: error.errmsg ? error.errmsg : error.toString(),
@@ -147,7 +142,6 @@ export class RegisterServices {
         .compare(data.password, result.password)
         .then((isMatch: any) => {
           if (isMatch) {
-
             //User match
 
             const payload = {
@@ -161,20 +155,6 @@ export class RegisterServices {
               data: payload,
               meta: {}
             };
-            //Sign token
-            /* return jwt.sign(
-              payload,
-              "process.env.JWT_SALT_LOGIN",
-              { expiresIn: "1h" },
-              async (e: any, token: string) => {
-                return {
-                  status: 200,
-                  message: "Login successful",
-                  data: { token: "Bearer " + token },
-                  meta: {}
-                };
-              }
-            ); */
           } else {
             return {
               status: 400,
@@ -182,11 +162,60 @@ export class RegisterServices {
               data: [],
               meta: {}
             };
-            /* res.status(400).json({
-            message: "Incorrect Password. Try Again"
-          }); */
           }
         });
+    } catch (error) {
+      return {
+        status: 400,
+        message: error.errmsg ? error.errmsg : error.toString(),
+        data: [],
+        meta: {}
+      };
+    }
+  }
+
+  async getMe(id: any) {
+    try {
+      const me = await this.model.findOne({ memberId: id });
+      return {
+        status: 200,
+        message: "Fetch Registered Information",
+        data: me,
+        meta: {}
+      };
+    } catch (error) {
+      return {
+        status: 400,
+        message: error.errmsg ? error.errmsg : error.toString(),
+        data: [],
+        meta: {}
+      };
+    }
+  }
+
+  async postEditReg(id: any, body: any) {
+    try {
+      const newBody = _.pick(body, [
+        "fullName",
+        "email",
+        "contactNo",
+        "userName"
+      ]);
+
+      const dealer = await this.model.findOneAndUpdate(
+        { memberId: id },
+        { $set: newBody },
+        {
+          new: true
+        }
+      );
+
+      return {
+        status: 200,
+        message: "Update Register Information",
+        data: dealer,
+        meta: {}
+      };
     } catch (error) {
       return {
         status: 400,
