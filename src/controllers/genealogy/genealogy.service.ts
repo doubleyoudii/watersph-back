@@ -40,7 +40,8 @@ export class GenealogyServices {
           // MemberID: data.user.memberId,
           MemberID: parameter.id,
           DateProcessed: convertDate,
-          PERIODNO: Number(parameter.period)
+          PERIODNO: Number(parameter.period),
+          Status: "ACTIVE"
         })
 
         .sort({ LevelPosition: 1 });

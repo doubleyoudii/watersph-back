@@ -72,7 +72,9 @@ export class GroupSalesServices {
       let listDates: any = [];
 
       //query this model (groupSales)
-      const groupListAll = await this.model.find({ MemberID: parameter.id });
+      const groupListAll = await this.model
+        .find({ MemberID: parameter.id })
+        .sort({ LevelPosition: 1 });
 
       const partialGroup = JSON.stringify(groupListAll);
       const b2bFilter = JSON.parse(partialGroup);
