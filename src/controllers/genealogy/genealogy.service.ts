@@ -32,14 +32,14 @@ export class GenealogyServices {
   async getData(params: any) {
     const parameter = params;
     const rawDate = parameter.date;
-    const convertDate = rawDate.split("-").join("/");
+    const convertDate = rawDate;
 
     try {
       const geneData = await this.model
         .find({
           // MemberID: data.user.memberId,
           MemberID: parameter.id,
-          DateProcessed: convertDate,
+          YEARPROCESSED: Number(convertDate),
           PERIODNO: Number(parameter.period),
           Status: "ACTIVE"
         })

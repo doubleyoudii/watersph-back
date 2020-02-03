@@ -31,13 +31,13 @@ export class PersonalSalesServices {
   async getData(params: any) {
     const parameter = params;
     const rawDate = parameter.date;
-    const convertDate = rawDate.split("-").join("/");
+    const convertDate = rawDate;
 
     try {
       const data = await this.model
         .find({
           MemberID: parameter.id,
-          TRANSACTIONDATE: convertDate,
+          Yearprocessed: Number(convertDate),
           Periodno: Number(parameter.period)
         })
         .sort({ TransactionNo: 1 });
