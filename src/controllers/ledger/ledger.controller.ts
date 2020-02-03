@@ -19,7 +19,7 @@ export class LedgerController {
 
   @Get({ path: "/specific/:year/:period", middlewares: [verifyTokenMember] })
   async getSoa(req: Request, res: Response, next: NextFunction) {
-    const id = "QC9500073";
+    const id = req.body.user.memberId;
     const request = {
       id: id,
       year: Number(req.params.year),

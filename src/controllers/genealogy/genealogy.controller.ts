@@ -26,8 +26,8 @@ export class GenealogyController {
     }
 
     //To Be Change
-    // const userId = req.body.user.memberId;
-    const userId = "QCY214337";
+    const userId = req.body.user.memberId;
+    // const userId = "QCY214337";
     const result = await this.services.getFilter(userId);
 
     let dates: any = [];
@@ -71,7 +71,7 @@ export class GenealogyController {
   @Get({ path: "/specific/:date/:period", middlewares: [verifyTokenMember] })
   async getData(req: Request, res: Response, next: NextFunction) {
     //To be Change
-    const userId = "QCY214337";
+    const userId = req.body.user.memberId;
     const params = {
       id: userId,
       date: req.params.date,

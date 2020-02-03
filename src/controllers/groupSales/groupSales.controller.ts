@@ -21,7 +21,7 @@ export class GroupSalesController {
   async getSales(req: Request, res: Response, next: NextFunction) {
     const reqData = {
       //to be change MemberId from middleware
-      id: "QCY215803",
+      id: req.body.user.memberId,
       date: req.params.date,
       period: req.params.period
     };
