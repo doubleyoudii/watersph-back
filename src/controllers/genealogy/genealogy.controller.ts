@@ -37,12 +37,12 @@ export class GenealogyController {
 
     //PickedFilter is rawfile picked
     const pickedFilter = b2bfilter.map((el: any) => {
-      const picked = _.pick(el, ["DateProcessed", "PERIODNO"]);
+      const picked = _.pick(el, ["YEARPROCESSED", "PERIODNO"]);
       return picked;
     });
 
     pickedFilter.forEach((el: any) => {
-      dates.push(el.DateProcessed);
+      dates.push(el.YEARPROCESSED);
       period.push(el.PERIODNO);
     });
 
@@ -51,11 +51,12 @@ export class GenealogyController {
     const filteredPeriod = removeDuplicates(period);
 
     var sortedStrings = filteredDate.sort(function(a: any, b: any) {
-      var aComps = a.split("/");
-      var bComps = b.split("/");
-      var aDate = new Date(aComps[2], aComps[0], aComps[1]);
-      var bDate = new Date(bComps[2], bComps[0], bComps[1]);
-      return aDate.getTime() - bDate.getTime();
+      // var aComps = a.split("/");
+      // var bComps = b.split("/");
+      // var aDate = new Date(aComps[2], aComps[0], aComps[1]);
+      // var bDate = new Date(bComps[2], bComps[0], bComps[1]);
+      // return aDate.getTime() - bDate.getTime();
+      return a - b;
     });
 
     res.status(result.status).json({
