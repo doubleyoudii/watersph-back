@@ -17,14 +17,15 @@ export class GroupSalesController {
     res.status(result.status).send(result);
   }
 
-  @Get({ path: "/specific/:datefrom", middlewares: [verifyTokenMember] })
+  @Get({ path: "/specific/:date/:period", middlewares: [verifyTokenMember] })
   async getSales(req: Request, res: Response, next: NextFunction) {
     const reqData = {
       //to be change MemberId from middleware
       id: "QCY215803",
-      datefrom: req.params.datefrom
+      date: req.params.date,
+      period: req.params.period
     };
-    const result = await this.services.getSales(reqData);
+    const result = await this.services.getGroup(reqData);
 
     res.status(result.status).send(result);
   }

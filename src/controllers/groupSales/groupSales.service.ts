@@ -29,7 +29,46 @@ export class GroupSalesServices {
     }
   }
 
-  async getSales(requests: any) {
+  async getGroup(requests: any) {
+    const parameter = requests;
+    const paramDate = Number(parameter.date);
+    const paramPeriod = Number(parameter.period);
+    function removeDuplicates(array: any) {
+      let x: any = {};
+      array.forEach(function(i: any) {
+        if (!x[i]) {
+          x[i] = true;
+        }
+      });
+      return Object.keys(x);
+    }
+
+    try {
+      const groupData = await this.model
+        .find({
+          MemberID: parameter.id,
+          Yearprocessed: paramDate,
+          Periodno: paramPeriod
+        })
+        .sort({ LevelPosition: 1 });
+
+      return {
+        status: 200,
+        message: "Fetch Group Sales based on Date From",
+        data: groupData,
+        meta: {}
+      };
+    } catch (error) {
+      return {
+        status: 400,
+        message: error.errmsg ? error.errmsg : error.toString(),
+        data: [],
+        meta: {}
+      };
+    }
+  }
+
+  /* async getSales(requests: any) {
     const parameter = requests;
     const rawDateFrom = parameter.datefrom;
 
@@ -133,5 +172,5 @@ export class GroupSalesServices {
         meta: {}
       };
     }
-  }
+  } */
 }

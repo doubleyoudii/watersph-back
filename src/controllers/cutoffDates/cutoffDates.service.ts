@@ -9,6 +9,15 @@ export class CutoffDatesServices {
   constructor() {}
 
   async getDateTest() {
+    function removeDuplicates(array: any) {
+      let x: any = {};
+      array.forEach(function(i: any) {
+        if (!x[i]) {
+          x[i] = true;
+        }
+      });
+      return Object.keys(x);
+    }
     try {
       const dates = await this.model.find();
       return {
@@ -28,42 +37,62 @@ export class CutoffDatesServices {
   }
 
   async passDate() {
+    function removeDuplicates(array: any) {
+      let x: any = {};
+      array.forEach(function(i: any) {
+        if (!x[i]) {
+          x[i] = true;
+        }
+      });
+      return Object.keys(x);
+    }
+
     const data = await this.model.find();
     let partialFilter: any = JSON.stringify(data);
     let b2bfilter = JSON.parse(partialFilter);
 
-    let dateFrom: any = [];
-    let dateTo: any = [];
+    let period: any = [];
+    let year: any = [];
 
     const pickedFilter = b2bfilter.map((el: any) => {
-      const picked = _.pick(el, ["DateFrom", "DateTo", "PeriodNo"]);
+      const picked = _.pick(el, [
+        "DateFrom",
+        "DateTo",
+        "PeriodNo",
+        "YEARPROCESSED"
+      ]);
       return picked;
     });
 
     pickedFilter.forEach((el: any) => {
-      dateFrom.push(el.DateFrom);
-      dateTo.push(el.DateTo);
+      period.push(el.PeriodNo);
+      year.push(el.YEARPROCESSED);
     });
 
-    let sortedDateFrom = dateFrom.sort(function(a: any, b: any) {
-      var aComps = a.split("/");
-      var bComps = b.split("/");
-      var aDate = new Date(aComps[2], aComps[0], aComps[1]);
-      var bDate = new Date(bComps[2], bComps[0], bComps[1]);
-      return aDate.getTime() - bDate.getTime();
+    const fnalYear = removeDuplicates(year);
+    const fnalPeriod = removeDuplicates(period);
+
+    let sortedPeriod = fnalPeriod.sort(function(a: any, b: any) {
+      // var aComps = a.split("/");
+      // var bComps = b.split("/");
+      // var aDate = new Date(aComps[2], aComps[0], aComps[1]);
+      // var bDate = new Date(bComps[2], bComps[0], bComps[1]);
+      // return aDate.getTime() - bDate.getTime();
+      return a - b;
     });
 
-    let sortedDateTo = dateTo.sort(function(a: any, b: any) {
-      var aComps = a.split("/");
-      var bComps = b.split("/");
-      var aDate = new Date(aComps[2], aComps[0], aComps[1]);
-      var bDate = new Date(bComps[2], bComps[0], bComps[1]);
-      return aDate.getTime() - bDate.getTime();
+    let sortedYear = fnalYear.sort(function(a: any, b: any) {
+      // var aComps = a.split("/");
+      // var bComps = b.split("/");
+      // var aDate = new Date(aComps[2], aComps[0], aComps[1]);
+      // var bDate = new Date(bComps[2], bComps[0], bComps[1]);
+      // return aDate.getTime() - bDate.getTime();
+      return a - b;
     });
 
     return {
-      dateFrom: sortedDateFrom,
-      dateTo: sortedDateTo
+      year: sortedYear,
+      period: sortedPeriod
     };
   }
 
