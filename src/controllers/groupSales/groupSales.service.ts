@@ -20,7 +20,6 @@ export class GroupSalesServices {
         meta: {}
       };
     } catch (error) {
-      console.log(error);
       return {
         status: 400,
         message: error.errmsg ? error.errmsg : error.toString(),
@@ -33,8 +32,6 @@ export class GroupSalesServices {
   async getSales(requests: any) {
     const parameter = requests;
     const rawDateFrom = parameter.datefrom;
-
-    console.log(rawDateFrom);
 
     function removeDuplicates(array: any) {
       let x: any = {};
@@ -106,9 +103,8 @@ export class GroupSalesServices {
       });
 
       const index1st = sortedFnalDateLists.indexOf(convertedDateFrom);
-      console.log(index1st);
+
       const index2nd = sortedFnalDateLists.indexOf(toDate);
-      console.log(index2nd);
 
       const slicedSortedDates = sortedFnalDateLists.slice(
         index1st,
