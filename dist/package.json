@@ -1,0 +1,19 @@
+{
+  "name": "WATERSBack",
+  "version": "0.0.0",
+  "description": "WATERSBack MayaJS Project",
+  "main": "index.js",
+  "dependencies": {
+    "@mayajs/common": "^0.3.0",
+    "@mayajs/core": "^0.3.2",
+    "@mayajs/mongo": "^0.2.2",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "nodemailer": "^6.4.2"
+  },
+  "engines": {
+    "node": "10.x"
+  }
+}
