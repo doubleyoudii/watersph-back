@@ -51,7 +51,7 @@ export class RegisterController {
       <div>
         
 
-        <p><a href="http://127.0.0.1:4200/signup/${result.data.payload.memberId}/${result.data.token}">http://localhost:3333/register/validate/${result.data.payload.memberId}/${result.data.token}</p>
+        <p><a href="${process.env.DEVELOPMENT}/signup/${result.data.payload.memberId}/${result.data.token}">**Proceed to Registration Page **</p>
       </div>
     `;
 

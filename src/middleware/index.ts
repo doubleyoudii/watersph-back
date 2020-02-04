@@ -42,10 +42,6 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const verifyTokenMember = (req: Request, res: Response, next: NextFunction) => {
-  /* console.log(process.env.USER_PASS);
-  console.log(typeof process.env.USER_PASS);
-  next(); */
-
   try {
     //Do something in Token
     const bearerHeader = req.headers["authorization"];
@@ -83,5 +79,3 @@ module.exports = {
   verifyToken,
   verifyTokenMember
 };
-//This will be add in every place you want to use this
-//const verify = require("../../middleware/verifyJWT");

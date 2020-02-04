@@ -1,5 +1,4 @@
 import {
-  SampleController,
   RegisterController,
   GenealogyController,
   GroupSalesController,
@@ -20,7 +19,6 @@ import {
 export const routes = [
   {
     controllers: [
-      SampleController,
       RegisterController,
       GenealogyController,
       GroupSalesController,
