@@ -52,11 +52,6 @@ export class PersonalSalesController {
     const filteredPeriod = removeDuplicates(period);
 
     var sortedStrings = filteredDate.sort(function(a: any, b: any) {
-      // var aComps = a.split("/");
-      // var bComps = b.split("/");
-      // var aDate = new Date(aComps[2], aComps[0], aComps[1]);
-      // var bDate = new Date(bComps[2], bComps[0], bComps[1]);
-      // return aDate.getTime() - bDate.getTime();
       return a - b;
     });
 

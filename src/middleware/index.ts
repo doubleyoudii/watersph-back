@@ -11,10 +11,12 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
       const bearer = bearerHeader!.split(" ");
       const bearerToken = bearer[1];
       req.body.token = bearerToken;
+      const salt: any = process.env.JWT_SALT_ADMIN;
 
       jwt.verify(
         req.body.token,
-        "testsecret",
+        // "testsecret",
+        salt,
         async (err: any, authData: any) => {
           if (err) {
             console.log(err);
@@ -40,6 +42,10 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const verifyTokenMember = (req: Request, res: Response, next: NextFunction) => {
+  /* console.log(process.env.USER_PASS);
+  console.log(typeof process.env.USER_PASS);
+  next(); */
+
   try {
     //Do something in Token
     const bearerHeader = req.headers["authorization"];
@@ -48,22 +54,19 @@ const verifyTokenMember = (req: Request, res: Response, next: NextFunction) => {
       const bearer = bearerHeader!.split(" ");
       const bearerToken = bearer[1];
       req.body.token = bearerToken;
+      const salt: any = process.env.JWT_SALT_MEMBER;
 
-      jwt.verify(
-        req.body.token,
-        "saltregisterlogin",
-        async (err: any, authData: any) => {
-          if (err) {
-            console.log(err);
-            res.status(403).json({
-              message: "Forbidden"
-            });
-          } else {
-            req.body.user = authData;
-            next();
-          }
+      jwt.verify(req.body.token, salt, async (err: any, authData: any) => {
+        if (err) {
+          console.log(err);
+          res.status(403).json({
+            message: "Forbidden"
+          });
+        } else {
+          req.body.user = authData;
+          next();
         }
-      );
+      });
     } else {
       res.status(403).json({
         message: "Forbidden 2"

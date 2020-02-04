@@ -24,7 +24,6 @@ export class AdminController {
   @Post({ path: "/createAdmin", middlewares: [] })
   async postCreate(req: Request, res: Response, next: NextFunction) {
     const result = await this.services.createAdmin(req.body);
-    console.log(result);
 
     res.status(result.status).send(result);
   }
@@ -32,6 +31,7 @@ export class AdminController {
   @Post({ path: "/login", middlewares: [] })
   async postLogin(req: Request, res: Response, next: NextFunction) {
     const result = await this.services.loginAdmin(req.body);
+    const salt: any = process.env.JWT_SALT_ADMIN;
 
     if (result.status !== 200) {
       res.status(result.status).send(result);
@@ -39,7 +39,7 @@ export class AdminController {
     }
     await jwt.sign(
       result.data,
-      "testsecret",
+      salt,
       { expiresIn: "1h" },
       (e: any, token: string) => {
         res

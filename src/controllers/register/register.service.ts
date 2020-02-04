@@ -2,7 +2,7 @@ import { Injectable } from "@mayajs/core";
 import { Models } from "@mayajs/mongo";
 import { ProfileServices } from "../profile/profile.service";
 
-var _ = require("lodash");
+const _ = require("lodash");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 

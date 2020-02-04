@@ -37,7 +37,6 @@ export class GenealogyServices {
     try {
       const geneData = await this.model
         .find({
-          // MemberID: data.user.memberId,
           MemberID: parameter.id,
           YEARPROCESSED: Number(convertDate),
           PERIODNO: Number(parameter.period),

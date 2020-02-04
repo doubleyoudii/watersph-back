@@ -2,6 +2,8 @@ import { Get, Patch, Post, Delete, Put, Check } from "@mayajs/common";
 import { Request, Response, NextFunction, json } from "express";
 import { Controller } from "@mayajs/core";
 import { RegisterServices } from "./register.service";
+// import { config } from "dotenv";
+// config();
 const _ = require("lodash");
 const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
@@ -16,9 +18,10 @@ export class RegisterController {
 
   @Get({
     path: "/",
-    middlewares: []
+    middlewares: [verifyTokenMember]
   })
   get(req: Request, res: Response, next: NextFunction): any {
+    console.log(process.env.USER_PASS);
     res.json({ message: "Welcome to register page" });
   }
 
@@ -104,6 +107,8 @@ export class RegisterController {
   @Post({ path: "/login", middlewares: [] })
   async postLogin(req: Request, res: Response, next: NextFunction) {
     const result: any = await this.services.postLogin(req.body);
+    const salt: any = process.env.JWT_SALT_MEMBER;
+    // console.log(salt);
 
     //Sign token   secket key must be hidden
     if (result.status !== 200) {
@@ -112,8 +117,8 @@ export class RegisterController {
     }
     await jwt.sign(
       result.data,
-      "saltregisterlogin",
-      { expiresIn: "5h" },
+      salt,
+      { expiresIn: "7h" },
       (e: any, token: string) => {
         res
           .status(result.status)

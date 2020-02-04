@@ -28,7 +28,7 @@ export class ForgotPasswordServices {
         memberId: testData.memberId
       };
       const salt = `${testData.memberId}`;
-      const token = jwt.sign(payload, salt, { expiresIn: "7h" });
+      const token = jwt.sign(payload, salt, { expiresIn: "2h" });
 
       return {
         status: 200,

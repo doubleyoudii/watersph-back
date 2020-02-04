@@ -73,20 +73,10 @@ export class CutoffDatesServices {
     const fnalPeriod = removeDuplicates(period);
 
     let sortedPeriod = fnalPeriod.sort(function(a: any, b: any) {
-      // var aComps = a.split("/");
-      // var bComps = b.split("/");
-      // var aDate = new Date(aComps[2], aComps[0], aComps[1]);
-      // var bDate = new Date(bComps[2], bComps[0], bComps[1]);
-      // return aDate.getTime() - bDate.getTime();
       return a - b;
     });
 
     let sortedYear = fnalYear.sort(function(a: any, b: any) {
-      // var aComps = a.split("/");
-      // var bComps = b.split("/");
-      // var aDate = new Date(aComps[2], aComps[0], aComps[1]);
-      // var bDate = new Date(bComps[2], bComps[0], bComps[1]);
-      // return aDate.getTime() - bDate.getTime();
       return a - b;
     });
 
