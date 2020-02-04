@@ -1,16 +1,17 @@
 {
-  "name": "WATERSBack",
-  "version": "0.0.0",
-  "description": "WATERSBack MayaJS Project",
+  "name": "watersjs",
+  "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "maya": "maya",
-    "start": "maya serve",
-    "build-prod": "rimraf dist & tsc"
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "mayajs"
-  ],
+  "engines": {
+    "node": "10.15.2"
+  },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "@mayajs/common": "^0.3.0",
     "@mayajs/core": "^0.3.2",
