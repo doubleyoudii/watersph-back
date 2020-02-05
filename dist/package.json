@@ -1,16 +1,16 @@
 {
-  "name": "watersback",
-  "version": "0.0.0",
-  "description": "WATERSBack MayaJS Project",
+  "name": "dist",
+  "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "maya": "maya",
     "start": "maya serve",
     "build-prod": "rimraf dist & tsc"
   },
-  "keywords": [
-    "mayajs"
-  ],
+  "author": "",
+  "license": "ISC",
   "engines": {
     "node": "10.15.2"
   },
