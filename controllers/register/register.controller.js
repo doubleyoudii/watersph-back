@@ -32,7 +32,6 @@ let RegisterController = class RegisterController {
         this.services = services;
     }
     get(req, res, next) {
-        console.log(process.env.USER_PASS);
         res.json({ message: "Welcome to register page" });
     }
     post(req, res, next) {
@@ -99,7 +98,6 @@ let RegisterController = class RegisterController {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield this.services.postLogin(req.body);
             const salt = process.env.JWT_SALT_MEMBER;
-            // console.log(salt);
             //Sign token   secket key must be hidden
             if (result.status !== 200) {
                 res.status(result.status).send(result);

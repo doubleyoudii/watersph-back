@@ -1,17 +1,19 @@
 {
-  "name": "watersjs",
+  "name": "dist",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "maya": "maya",
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "engines": {
-    "node": "10.15.2"
+    "build-prod": "rimraf dist & tsc"
   },
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "10.15.2"
+  },
   "dependencies": {
     "@mayajs/common": "^0.3.0",
     "@mayajs/core": "^0.3.2",

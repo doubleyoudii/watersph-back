@@ -30,7 +30,15 @@ let ForgotPasswordServices = class ForgotPasswordServices {
         return __awaiter(this, void 0, void 0, function* () {
             const id = _.pick(body, ["memberId"]);
             try {
-                let testData = yield this.register.registrationMember(id.memberId);
+                let currentId = Number(id.memberId);
+                let convertedId;
+                if (Number.isNaN(currentId)) {
+                    convertedId = id.memberId;
+                }
+                else {
+                    convertedId = currentId;
+                }
+                let testData = yield this.register.registrationMember(convertedId);
                 if (!testData) {
                     return {
                         status: 400,

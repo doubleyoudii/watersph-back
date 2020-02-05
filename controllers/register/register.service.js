@@ -32,9 +32,17 @@ let RegisterServices = class RegisterServices {
         return __awaiter(this, void 0, void 0, function* () {
             let data = _.pick(body, ["email", "memberId"]);
             try {
+                let currentId = Number(data.memberId);
+                let convertedId;
+                if (Number.isNaN(currentId)) {
+                    convertedId = data.memberId;
+                }
+                else {
+                    convertedId = currentId;
+                }
                 //find member id is MemberIDcollection
                 //if true, return data. else return error
-                const member = yield this.profiles.findMember(data.memberId);
+                const member = yield this.profiles.findMember(convertedId);
                 if (member.status !== 200) {
                     //Checks if memberId is Valid or not
                     return {
@@ -143,7 +151,15 @@ let RegisterServices = class RegisterServices {
         return __awaiter(this, void 0, void 0, function* () {
             const data = _.pick(body, ["memberId", "password"]);
             try {
-                const result = yield this.model.findOne({ memberId: data.memberId });
+                let currentId = Number(data.memberId);
+                let convertedId;
+                if (Number.isNaN(currentId)) {
+                    convertedId = data.memberId;
+                }
+                else {
+                    convertedId = currentId;
+                }
+                const result = yield this.model.findOne({ memberId: convertedId });
                 if (!result) {
                     return {
                         status: 404,
