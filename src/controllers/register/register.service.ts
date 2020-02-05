@@ -14,9 +14,20 @@ export class RegisterServices {
     let data = _.pick(body, ["email", "memberId"]);
 
     try {
+      let currentId = Number(data.memberId);
+      let convertedId: any;
+      console.log(currentId);
+      if (Number.isNaN(currentId)) {
+        convertedId = data.memberId;
+      } else {
+        convertedId = currentId;
+      }
+      // console.log(typeof convertedId);
+      console.log(convertedId);
+
       //find member id is MemberIDcollection
       //if true, return data. else return error
-      const member = await this.profiles.findMember(data.memberId);
+      const member = await this.profiles.findMember(convertedId);
 
       if (member.status !== 200) {
         //Checks if memberId is Valid or not
@@ -56,7 +67,18 @@ export class RegisterServices {
 
   async getCredentials(body: any) {
     const parameter = _.pick(body, ["memberId", "token"]);
+    console.log(parameter);
     try {
+      /* let currentId = Number(parameter.memberId);
+      let convertedId: any;
+      console.log(currentId);
+      if (Number.isNaN(currentId)) {
+        convertedId = parameter.memberId;
+      } else {
+        convertedId = currentId;
+      }
+      // console.log(typeof convertedId);
+      console.log(convertedId); */
       const payload = jwt.verify(parameter.token, parameter.memberId);
 
       if (!payload) {
@@ -127,7 +149,16 @@ export class RegisterServices {
   async postLogin(body: any) {
     const data = _.pick(body, ["memberId", "password"]);
     try {
-      const result = await this.model.findOne({ memberId: data.memberId });
+      let currentId = Number(data.memberId);
+      let convertedId: any;
+      console.log(currentId);
+      if (Number.isNaN(currentId)) {
+        convertedId = data.memberId;
+      } else {
+        convertedId = currentId;
+      }
+
+      const result = await this.model.findOne({ memberId: convertedId });
 
       if (!result) {
         return {

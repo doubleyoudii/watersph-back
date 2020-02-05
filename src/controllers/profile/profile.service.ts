@@ -8,8 +8,10 @@ export class ProfileServices {
 
   async findMember(idMember: any) {
     const memberId = idMember;
+    console.log(typeof memberId);
     try {
       const result = await this.model.findOne({ MemberID: memberId });
+      console.log(result);
 
       if (!result) {
         return {

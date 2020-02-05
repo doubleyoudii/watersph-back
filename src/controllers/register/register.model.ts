@@ -18,11 +18,7 @@ const schema = MongoSchema({
   userName: {
     type: String
   },
-  memberId: {
-    required: [true, "Member ID is required"],
-    type: String,
-    unique: true
-  },
+  memberId: {},
   email: {
     required: [true, "email is Required"],
     type: String

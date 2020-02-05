@@ -1,9 +1,7 @@
 import { MongoSchema, MongoModel } from "@mayajs/mongo";
 
 const schema = MongoSchema({
-  MemberID: {
-    type: String
-  }
+  MemberID: {}
 });
 
 export default MongoModel("GroupSales", schema);
