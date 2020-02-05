@@ -13,14 +13,12 @@ export class ForgotPasswordServices {
     try {
       let currentId = Number(id.memberId);
       let convertedId: any;
-      console.log(currentId);
+
       if (Number.isNaN(currentId)) {
         convertedId = id.memberId;
       } else {
         convertedId = currentId;
       }
-      // console.log(typeof convertedId);
-      console.log(convertedId);
 
       let testData = await this.register.registrationMember(convertedId);
 

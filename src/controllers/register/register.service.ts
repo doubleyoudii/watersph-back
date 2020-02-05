@@ -16,14 +16,12 @@ export class RegisterServices {
     try {
       let currentId = Number(data.memberId);
       let convertedId: any;
-      console.log(currentId);
+
       if (Number.isNaN(currentId)) {
         convertedId = data.memberId;
       } else {
         convertedId = currentId;
       }
-      // console.log(typeof convertedId);
-      console.log(convertedId);
 
       //find member id is MemberIDcollection
       //if true, return data. else return error
@@ -67,18 +65,8 @@ export class RegisterServices {
 
   async getCredentials(body: any) {
     const parameter = _.pick(body, ["memberId", "token"]);
-    console.log(parameter);
+
     try {
-      /* let currentId = Number(parameter.memberId);
-      let convertedId: any;
-      console.log(currentId);
-      if (Number.isNaN(currentId)) {
-        convertedId = parameter.memberId;
-      } else {
-        convertedId = currentId;
-      }
-      // console.log(typeof convertedId);
-      console.log(convertedId); */
       const payload = jwt.verify(parameter.token, parameter.memberId);
 
       if (!payload) {
@@ -151,7 +139,7 @@ export class RegisterServices {
     try {
       let currentId = Number(data.memberId);
       let convertedId: any;
-      console.log(currentId);
+
       if (Number.isNaN(currentId)) {
         convertedId = data.memberId;
       } else {

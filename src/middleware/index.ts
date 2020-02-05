@@ -19,7 +19,6 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
         salt,
         async (err: any, authData: any) => {
           if (err) {
-            console.log(err);
             res.status(403).json({
               message: "Forbidden"
             });
@@ -54,7 +53,6 @@ const verifyTokenMember = (req: Request, res: Response, next: NextFunction) => {
 
       jwt.verify(req.body.token, salt, async (err: any, authData: any) => {
         if (err) {
-          console.log(err);
           res.status(403).json({
             message: "Forbidden"
           });

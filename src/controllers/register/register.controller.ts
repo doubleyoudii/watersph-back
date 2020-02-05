@@ -21,7 +21,6 @@ export class RegisterController {
     middlewares: [verifyTokenMember]
   })
   get(req: Request, res: Response, next: NextFunction): any {
-    console.log(process.env.USER_PASS);
     res.json({ message: "Welcome to register page" });
   }
 
@@ -108,7 +107,6 @@ export class RegisterController {
   async postLogin(req: Request, res: Response, next: NextFunction) {
     const result: any = await this.services.postLogin(req.body);
     const salt: any = process.env.JWT_SALT_MEMBER;
-    // console.log(salt);
 
     //Sign token   secket key must be hidden
     if (result.status !== 200) {
