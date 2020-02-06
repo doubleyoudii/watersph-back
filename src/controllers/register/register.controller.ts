@@ -29,9 +29,6 @@ export class RegisterController {
     middlewares: [
       Check("email")
         .isEmail()
-        .required(),
-      Check("memberId")
-        .isString()
         .required()
     ]
   })
