@@ -25,7 +25,7 @@ export class LedgerServices {
     const id = userId;
 
     try {
-      const partialFilter = await this.sumInc.findID({ MemberID: id });
+      const partialFilter = await this.sumInc.findID(id);
 
       return {
         status: 200,
