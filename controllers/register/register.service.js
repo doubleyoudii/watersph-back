@@ -308,10 +308,19 @@ let RegisterServices = class RegisterServices {
   }
   findRegMemberAndChangepassword(body) {
     return __awaiter(this, void 0, void 0, function*() {
-      let user = yield this.model.findOne({ memberId: body.memberId });
+      let currentId = Number(body.memberId);
+      let convertedId;
+      if (Number.isNaN(currentId)) {
+        convertedId = body.memberId;
+      } else {
+        convertedId = currentId;
+      }
+      let user = yield this.model.findOne({ memberId: convertedId });
       if (!user) {
         return null;
       }
+
+      user.memberId = convertedId;
       user.password = body.password;
       yield user.save();
       return user;
