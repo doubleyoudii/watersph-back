@@ -261,10 +261,18 @@ export class RegisterServices {
   }
 
   async findRegMemberAndChangepassword(body: any) {
-    let user = await this.model.findOne({ memberId: body.memberId });
+    let currentId = Number(body.memberId);
+    let convertedId;
+    if (Number.isNaN(currentId)) {
+      convertedId = body.memberId;
+    } else {
+      convertedId = currentId;
+    }
+    let user = await this.model.findOne({ memberId: convertedId });
     if (!user) {
       return null;
     }
+    user.memberId = convertedId;
     user.password = body.password;
     await user.save();
     return user;
