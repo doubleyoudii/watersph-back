@@ -77,7 +77,7 @@ let LedgerServices = class LedgerServices {
     this.gpd = gpd;
     this.royaltyDisc = royaltyDisc;
   }
-  getFilter() {
+  getFilter(userId) {
     return __awaiter(this, void 0, void 0, function*() {
       const id = userId;
       try {
