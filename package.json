@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "maya": "maya",
-    "start": "maya serve"
+    "start": "maya serve",
+    "build-prod": "rimraf dist & tsc"
   },
   "keywords": [
     "mayajs"
@@ -13,7 +14,7 @@
   "dependencies": {
     "@mayajs/common": "^0.3.0",
     "@mayajs/core": "^0.3.2",
-    "@mayajs/mongo": "0.2.0",
+    "@mayajs/mongo": "^0.2.2",
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "jsonwebtoken": "^8.5.1",
