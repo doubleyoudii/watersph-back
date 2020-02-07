@@ -117,9 +117,20 @@ let RegisterServices = class RegisterServices {
                 "userName"
             ]);
             try {
+                let currentId = Number(data.memberId);
+                let convertedId;
+                if (Number.isNaN(currentId)) {
+                    convertedId = data.memberId;
+                }
+                else {
+                    convertedId = currentId;
+                }
+
                 const checkIfexist = yield this.model.findOne({
-                    memberId: data.memberId
+                    memberId: convertedId
                 });
+
+
                 if (checkIfexist !== null) {
                     return {
                         status: 400,
@@ -128,6 +139,8 @@ let RegisterServices = class RegisterServices {
                         meta: {}
                     };
                 }
+                data.memberId = convertedId;
+                
                 const result = yield this.model.create(data);
                 const finalReg = yield result.save();
                 return {
