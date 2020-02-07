@@ -105,7 +105,7 @@ let RegisterController = class RegisterController {
             });
             // send mail with defined transport object
             let info = yield transporter.sendMail({
-              from: `"William of Techcellar 👻" <${process.env.USER_EMAIL}>`,
+              from: `"Waters Philippines Distributor's Portal" <${process.env.USER_EMAIL}>`,
               to: `${result.data.payload.email}`,
               subject: "Email Verification",
               text: "Read Me!",
