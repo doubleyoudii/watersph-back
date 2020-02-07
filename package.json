@@ -1,16 +1,25 @@
 {
-  "name": "WATERSBack",
-  "version": "0.0.0",
-  "description": "WATERSBack MayaJS Project",
+  "name": "watersph-back",
+  "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "maya": "maya",
-    "start": "maya serve",
-    "build-prod": "rimraf dist & tsc"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
-  "keywords": [
-    "mayajs"
-  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/doubleyoudii/watersph-back.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/doubleyoudii/watersph-back/issues"
+  },
+  "homepage": "https://github.com/doubleyoudii/watersph-back#readme",
+  "engines": {
+    "node": "10.15.2"
+  },
   "dependencies": {
     "@mayajs/common": "^0.3.0",
     "@mayajs/core": "^0.3.2",
