@@ -15,4 +15,9 @@ export class Soa_summary_incomeServices {
 
     return data;
   }
+  async findID(id: any) {
+    const data = await this.model.find({ Memberid: id });
+    console.log(data);
+    return data;
+  }
 }

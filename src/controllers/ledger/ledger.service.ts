@@ -21,16 +21,26 @@ export class LedgerServices {
     private royaltyDisc: Soa_royalty_discountServices
   ) {}
 
-  async getFilter() {
+  async getFilter(userId: any) {
+    const id = userId;
+
     try {
-      const data = await this.cutoff.passYearAndPeriod();
+      const partialFilter = await this.sumInc.findID({ MemberID: id });
 
       return {
         status: 200,
-        message: "Test Year and period",
-        data: data,
+        message: "Ledger by Summary Fetch by id",
+        data: partialFilter,
         meta: {}
       };
+
+      // const data = await this.cutoff.passYearAndPeriod();
+      // return {
+      //   status: 200,
+      //   message: "Test Year and period",
+      //   data: data,
+      //   meta: {}
+      // };
     } catch (error) {
       return {
         status: 400,
