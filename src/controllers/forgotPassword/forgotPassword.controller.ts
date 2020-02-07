@@ -50,7 +50,7 @@ export class ForgotPasswordController {
 
         // send mail with defined transport object
         let info = await transporter.sendMail({
-          from: `"William of Techcellar 👻" <${process.env.USER_EMAIL}>`, // sender address
+          from: `"Waters Philippines Distributor's Portal" <${process.env.USER_EMAIL}>`, // sender address
           to: `${result.data.payload.email}`, // list of receivers
           subject: "Forgot Password Verification", // Subject line
           text: "Read Me!", // plain text body
