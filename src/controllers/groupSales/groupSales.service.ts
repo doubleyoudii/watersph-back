@@ -9,16 +9,26 @@ export class GroupSalesServices {
   @Models("groupSales") model: any;
   constructor(private cutoff: CutoffDatesServices) {}
 
-  async getDates() {
+  async getDates(userId: any) {
+    const id = userId;
     try {
-      const dateList = await this.cutoff.passDate();
+      const partialFilter = await this.model.find({ MemberID: id });
 
       return {
         status: 200,
-        message: "Dates fetch",
-        data: dateList,
+        message: "Personal Sales Fetch by id",
+        data: partialFilter,
         meta: {}
       };
+
+      // const dateList = await this.cutoff.passDate();
+
+      // return {
+      //   status: 200,
+      //   message: "Dates fetch",
+      //   data: dateList,
+      //   meta: {}
+      // };
     } catch (error) {
       return {
         status: 400,
