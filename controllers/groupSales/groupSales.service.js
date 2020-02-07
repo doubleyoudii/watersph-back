@@ -115,7 +115,7 @@ let GroupSalesServices = class GroupSalesServices {
             Yearprocessed: paramDate,
             Periodno: paramPeriod
           })
-          .sort({ LevelPosition: 1 });
+          .sort({ Level: 1 });
         return {
           status: 200,
           message: "Fetch Group Sales based on Date From",
