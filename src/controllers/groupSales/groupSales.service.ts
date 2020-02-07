@@ -60,7 +60,7 @@ export class GroupSalesServices {
           Yearprocessed: paramDate,
           Periodno: paramPeriod
         })
-        .sort({ LevelPosition: 1 });
+        .sort({ Level: 1 });
 
       return {
         status: 200,
