@@ -104,8 +104,16 @@ export class RegisterServices {
       "userName"
     ]);
     try {
+      let currentId = Number(data.memberId);
+      let convertedId;
+      if (Number.isNaN(currentId)) {
+        convertedId = data.memberId;
+      } else {
+        convertedId = currentId;
+      }
+
       const checkIfexist = await this.model.findOne({
-        memberId: data.memberId
+        memberId: currentId
       });
       if (checkIfexist !== null) {
         return {
@@ -116,6 +124,7 @@ export class RegisterServices {
         };
       }
 
+      data.memberId = convertedId;
       const result = await this.model.create(data);
       const finalReg = await result.save();
       return {
